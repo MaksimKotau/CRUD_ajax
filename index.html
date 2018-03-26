@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Examen MVC Maksim Kotau</title>
+    <meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="styles/global.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script language="javascript" src="js/prod.js"></script>
+	<script language="javascript" src="prod/prodRequetes.js"></script>
+	<script language="javascript" src="prod/prodControleurVue.js"></script>
+  </head>
+  <body>
+		<div class="container fixed-top">
+			<nav class="navbar navbar-expand-lg bg-white shadowed">
+			  <a class="navbar-brand  text-dark" href="#">Maksim Kotau</a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			    <div class="navbar-nav">
+			      <a class="nav-item nav-link text-dark" href="#" onClick="hideAllExcept('divEnreg');">Enregitrer</a>
+			      <a class="nav-item nav-link text-dark" href="#" onClick="hideAllExcept('divLister'); lister();">Lister</a>
+				  <a class="nav-item nav-link text-dark" href="#" onClick="hideAllExcept('divSorter');">Lister par categorie</a>
+				  <a class="nav-item nav-link text-dark" href="#" onClick="hideAllExcept('divEnlever');">Enlever</a>
+			      <a class="nav-item nav-link text-dark" href="#" onClick="hideAllExcept('divCompter'); compter();">Compter</a>
+			      <a class="nav-item nav-link text-dark" href="#" onClick="hideAllExcept('divRecherche');">Rechercher</a>
+				  
+			    </div>
+			  </div>
+			</nav>
+		</div>
+		
+		
+<div class="container bg-white p-3 shadowed blockAjax" id="divEnreg" style="margin-top: 100px; display: none;">
+	<h1 class="text-center">Enregistrer</h1>
+  <form id="formEnreg" action="prod/prodControleur.php" method="POST" onSubmit="return valider();">
+    <div class="form-group row">
+      <label for="inputNom" class="col-sm-2 col-form-label">Nom produit</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputNom" name="nomProduit" placeholder="Nom produit">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputCategor" class="col-sm-2 col-form-label">Categorie de produits</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputCategor" name="categor" placeholder="Categorie">
+      </div>
+    </div>
+	<div class="form-group row">
+      <label for="inputPrix" class="col-sm-2 col-form-label">Prix de produits</label>
+      <div class="col-sm-10">
+        <input type="number" min="0" step="0.01" class="form-control" id="inputPrix" name="prix" placeholder="Prix">
+      </div>
+    </div>
+	<div class="form-group row">
+      <label for="inputInvent" class="col-sm-2 col-form-label">Quantite inventaire</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" id="inputInvent" name="invent" placeholder="Quantite inventaire">
+      </div>
+    </div>
+	<div class="form-group row">
+      <label for="inputCom" class="col-sm-2 col-form-label">qteCom</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" id="inputCom" name="qteCom" placeholder="qteCom">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="offset-sm-2 col-sm-10">
+        <button type="button" onClick="hideAllExcept(''); enregistrer();" class="btn btn-primary">Enregistrer</button>
+      </div>
+    </div>
+  </form>
+</div>
+		
+		
+	
+
+<div class="container bg-white p-3 shadowed  blockAjax" id="divEnlever" style="margin-top: 100px; display: none;">
+	<h1 class="text-center">Enlever</h1>
+  <form id="formEnlever" action="prod/prodControleur.php" method="POST" onSubmit="return validerNum();">
+	<div class="form-group row">
+      <label for="inputId" class="col-sm-2 col-form-label">Id de produits</label>
+      <div class="col-sm-10">
+        <input type="number" min="1" step="1" class="form-control" id="inputId" name="id" placeholder="Id">
+      </div>
+    </div>
+	
+    <div class="form-group row">
+      <div class="offset-sm-2 col-sm-10">
+        <button type="button" onClick="hideAllExcept(''); enlever();" class="btn btn-primary">Enlever</button>
+      </div>
+    </div>
+  </form>
+</div>	
+
+
+
+
+<div class="container bg-white p-3 shadowed  blockAjax" id="divLister" style="margin-top: 100px; display: none">
+	
+	
+  <form id="formLister" action="prod/prodControleur.php" method="POST">
+  </form>
+</div>		
+		
+<div class="container bg-white p-3 shadowed  blockAjax" id="divRecherche" style="margin-top: 100px; display: none;">
+	<h1 class="text-center">Rechercher</h1>
+  <form id="formRecherche" action="prod/prodControleur.php" method="POST" onSubmit="return validerNum();">
+	<div class="form-group row">
+      <label for="inputId" class="col-sm-2 col-form-label">Id de produits</label>
+      <div class="col-sm-10">
+        <input type="number" min="1" step="1" class="form-control" id="inputIdProd" name="id" placeholder="Id">
+      </div>
+    </div>
+	
+    <div class="form-group row">
+      <div class="offset-sm-2 col-sm-10">
+        <button type="button" onClick="rechercher(); hideAllExcept('divLister');" class="btn btn-primary">Rechercher</button>
+      </div>
+    </div>
+  </form>
+</div>		
+
+
+<div class="container bg-white p-3 shadowed  blockAjax" id="divCompter" style="margin-top: 100px; display: none;">
+	<h1 class="text-center">Nombre de produits est superieur 100$:</h1>
+	<h2 id="compterResultat" class="text-center"></h2>
+  </form>
+</div>		
+		
+<div class="container bg-white p-3 shadowed  blockAjax" id="divSorter" style="margin-top: 100px; display: none;">
+	<h1 class="text-center">Rechercher par categorie</h1>
+  <form id="formSorter" action="prod/prodControleur.php" method="POST">
+	<div class="form-group row">
+    <label for="categor" class="col-sm-2 col-form-label">Example select</label>
+		<div class="col-sm-10">
+			<select class="form-control" id="categProd" name="categProd">
+			  <option value="Boissons">Boissons</option>
+			  <option value="Condiments">Condiments</option>
+			  <option value="Produits secs">Produits secs</option>
+			  <option value="Viandes">Viandes</option>
+			  <option value="Poissons et fruits de mer">Poissons et fruits de mer</option>
+			</select>
+	</div>
+  </div>
+	
+    <div class="form-group row">
+      <div class="offset-sm-2 col-sm-10">
+        <button type="button" onClick="hideAllExcept('divLister'); sorter();" class="btn btn-primary">Rechercher</button>
+      </div>
+    </div>
+  </form>
+</div>	
+
+
+
+
+
+		
+		
+		
+	<nav class="navbar fixed-bottom navbar-light bg-light">
+		<h4 id="messages"></h4>
+	</nav>	
+  </body>
+</html>
